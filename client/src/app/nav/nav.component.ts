@@ -14,7 +14,7 @@ export class NavComponent implements OnInit {
   //create class property to store what user entered into the form
   model: any = {}
 
-
+//inject member service
   constructor(public accountService: AccountService, private router: Router, 
     private toastr: ToastrService) { }
 
@@ -24,6 +24,7 @@ export class NavComponent implements OnInit {
   login() {
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/members');
+      //afterlogged in successfully, reset the userParams 
     })
     // , error => {
     //   console.log(error);
