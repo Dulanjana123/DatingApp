@@ -1,6 +1,8 @@
 using API.Data;
+using API.Entities;
 using API.Extensions;
 using API.Middleware;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -8,10 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 //services container
 
-builder.Services.AddApplicationServices(builder.Configuration);
+
 builder.Services.AddControllers();
-builder.Services.AddCors();
+builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
+
+// builder.Services.AddCors();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
@@ -51,8 +55,11 @@ var services = scope.ServiceProvider;
 try
 {
     var context = services.GetRequiredService<DataContext>();
+    //var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    //var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
     await Seed.SeedUser(context);
+    //await Seed.SeedUsers(userManager, roleManager);
 }
 catch(Exception ex)
 {
