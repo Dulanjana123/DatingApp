@@ -52,11 +52,10 @@ namespace API.Controllers
              
         //get a user
         //api/users/3
-        
-        [HttpGet("{username}")]
-        public async Task <ActionResult<MemberDto>> GetUser(string username)
+        [HttpGet("{userName}")]
+        public async Task <ActionResult<MemberDto>> GetUser(string userName)
         {
-            return await _userRepository.GetMemberAsync(username); //get entity from memmory from this request
+            return await _userRepository.GetMemberAsync(userName); //get entity from memmory from this request
 
             //return _mapper.Map<MemberDto>(user); // in memmory we map one object to another
         }
