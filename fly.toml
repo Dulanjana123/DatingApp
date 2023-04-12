@@ -1,0 +1,34 @@
+# fly.toml file generated for da-chat on 2023-04-12T21:14:46+05:30
+
+app = "da-chat"
+kill_signal = "SIGINT"
+kill_timeout = 5
+mounts = []
+primary_region = "sin"
+processes = []
+
+[build]
+  image = "dulanjanad/datingapp:latest"
+
+[env]
+  ASPNETCORE_URLS="http://+:8080"
+  CloudinarySettings__CloudName="do0yx2noz"
+  CloudinarySettings__ApiKey="212934448845977"
+
+[[services]]
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
