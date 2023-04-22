@@ -1,4 +1,4 @@
-# fly.toml file generated for da-chat on 2023-04-12T21:14:46+05:30
+# fly.toml file generated for da-chat on 2023-04-22T22:17:28+05:30
 
 app = "da-chat"
 kill_signal = "SIGINT"
